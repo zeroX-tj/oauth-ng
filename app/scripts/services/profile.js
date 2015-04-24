@@ -24,6 +24,15 @@ profileClient.factory('Profile', ['$http', 'AccessToken', '$rootScope', function
     return profile;
   };
 
+  service.logout = function(server, path){
+      var promise = $http.delete(uri+path, { headers: headers() });
+      promise.success(function(response) {
+          $rootScope.$broadcast('oauth:destroyed');
+          window.location.replace(server+'/logout');
+      });
+      return promise;
+  }
+
   var headers = function() {
     return { Authorization: 'Bearer ' + AccessToken.get().access_token };
   };
