@@ -25,7 +25,7 @@ profileClient.factory('Profile', ['$http', 'AccessToken', '$rootScope', function
   };
 
   service.logout = function(server, path){
-      var promise = $http.delete(uri+path, { headers: headers() });
+      var promise = $http.delete(server+path, { headers: headers() });
       promise.success(function(response) {
           $rootScope.$broadcast('oauth:destroyed');
           window.location.replace(server+'/logout');

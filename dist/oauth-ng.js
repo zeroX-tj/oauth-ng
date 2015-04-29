@@ -1,4 +1,4 @@
-/* oauth-ng - v0.3.8 - 2015-04-24 */
+/* oauth-ng - v0.3.8 - 2015-04-29 */
 
 'use strict';
 
@@ -264,7 +264,7 @@ profileClient.factory('Profile', ['$http', 'AccessToken', '$rootScope', function
   };
 
   service.logout = function(server, path){
-      var promise = $http.delete(uri+path, { headers: headers() });
+      var promise = $http.delete(server+path, { headers: headers() });
       promise.success(function(response) {
           $rootScope.$broadcast('oauth:destroyed');
           window.location.replace(server+'/logout');
@@ -382,7 +382,7 @@ directives.directive('oauth', [
       text: '@',          // (optional) login text
       authorizePath: '@', // (optional) authorization url
       state: '@',         // (optional) An arbitrary unique string created by your app to guard against Cross-site Request Forgery
-      storage: '@'       // (optional) Store token in 'sessionStorage' or 'localStorage', defaults to 'sessionStorage'
+      storage: '@'        // (optional) Store token in 'sessionStorage' or 'localStorage', defaults to 'sessionStorage'
     }
   };
 
