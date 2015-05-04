@@ -87,6 +87,12 @@ directives.directive('oauth', [
       Endpoint.redirect();
     };
 
+    $rootScope.$on('oauth:unauthorized', function () {
+        AccessToken.destroy(scope);
+        $rootScope.$broadcast('oauth:logout');
+        loggedOut();
+    });
+
     scope.logout = function() {
       Profile.logout(scope.site, scope.tokenPath);
       AccessToken.destroy(scope);

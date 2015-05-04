@@ -1,4 +1,4 @@
-/* oauth-ng - v0.3.8 - 2015-04-29 */
+/* oauth-ng - v0.3.8 - 2015-05-04 */
 
 'use strict';
 
@@ -440,6 +440,12 @@ directives.directive('oauth', [
     scope.login = function() {
       Endpoint.redirect();
     };
+
+    $rootScope.$on('oauth:unauthorized', function () {
+        AccessToken.destroy(scope);
+        $rootScope.$broadcast('oauth:logout');
+        loggedOut();
+    });
 
     scope.logout = function() {
       Profile.logout(scope.site, scope.tokenPath);
